@@ -11,7 +11,7 @@ public class Support {
 		Scanner scanner = new Scanner(System.in);
 		String line = scanner.nextLine();
 		TreeMap<String, Integer> keyWords = new TreeMap<String, Integer>();
-		String[] words = line.split(" ");
+		String[] words = line.split("\\W");
 		for (int i = 0; i < words.length; i++) {
 			String word = words[i].toLowerCase();
 			if (keyWords.get(word) == null) {
@@ -21,7 +21,9 @@ public class Support {
 		System.out.println("Thanks for contacting, we recommend:");
 		Set<Map.Entry<String, Integer>> entrySet = keyWords.entrySet();
 		for (Map.Entry<String, Integer> entry: entrySet) {
-			System.out.println(Answer.getAnswer(entry.getKey()));
+			if (Answer.getAnswer(entry.getKey()) != null) {
+				System.out.println(Answer.getAnswer(entry.getKey()));
+			}
 		}
 
 	}
@@ -29,7 +31,7 @@ public class Support {
 	public enum Answer {
 		ram("ram", "exaggerate the ram capcity", "DDR to GDDR", "ERAM!"),
 		cpu("cpu", "higher frequency CPU", "AMD to INTEL", "overclocking CPU!"),
-		disk("disk", "lager capcity disk", "SSD!", "10000 rpm!");
+		disk("disk", "lager disk capcity", "SSD!", "10000 rpm!");
 
 		private String word;
 		private String answer1;
