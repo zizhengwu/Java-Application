@@ -7,3 +7,5 @@ bin
 eclimd.log
 
 *.docx
+
+*.pdf
