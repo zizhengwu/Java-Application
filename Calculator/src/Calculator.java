@@ -1,13 +1,18 @@
 import java.util.Stack;
 import java.lang.Character;
-
+import java.util.Scanner;
 public class Calculator {
 	public static void main(String[] args) {
 		String expression = "";
-		for (int i = 0; i < args.length; i++) {
-			expression += args[i];
+		// for (int i = 0; i < args.length; i++) {
+		// 	expression += args[i];
+		// }
+		while(true) {
+			Scanner scanner = new Scanner(System.in);
+			String line = scanner.nextLine();
+			expression = line;
+			System.out.println(evaluateExpression(expression));
 		}
-		System.out.println(evaluateExpression(expression));
 	}
 
 	public static int evaluateExpression(String expression) {
