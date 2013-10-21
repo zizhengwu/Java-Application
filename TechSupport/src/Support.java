@@ -29,16 +29,16 @@ public class Support {
 	}
 
 	public enum Answer {
-		ram("ram", "exaggerate the ram capcity", "DDR to GDDR", "ERAM!"),
+		ram("ram", "exaggerate the ram capacity", "DDR to GDDR", "ERAM!"),
 		cpu("cpu", "higher frequency CPU", "AMD to INTEL", "overclocking CPU!"),
-		disk("disk", "lager disk capcity", "SSD!", "10000 rpm!");
+		disk("disk", "lager disk capacity", "SSD!", "10000 rpm!");
 
 		private String word;
 		private String answer1;
 		private String answer2;
 		private String answer3;
 
-		private Answer(String word, String answer1, String answer2, String answer3){
+		private Answer(String word, String answer1, String answer2, String answer3) {
 			this.word = word;
 			this.answer1 = answer1;
 			this.answer2 = answer2;
