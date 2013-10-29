@@ -60,30 +60,47 @@ public class Util {
 
 
 	public static void printStudent(String args) {
+		int count = 0;
+		int total = 0;
 		Collection<Entry> values = nameMap.get(args);
 		if (values == null) {
 			System.out.println("Student not found");
 		}
 		else {
 			for(Entry object : values) {
+				count ++;
+				total += object.getScore();
 				System.out.println(object.getCourseName());
 				System.out.println(object.getScore());
 			}
 		}
+		System.out.println("Total:");
+		System.out.println(Integer.toString(total));
+		System.out.println("Average:");
+		System.out.println(Integer.toString(total / count));
+
 	}
 
 
 	public static void printCourse(String args) {
+		int count = 0;
+		int total = 0;
 		Collection<Entry> values = courseMap.get(args);
 		if (values == null) {
 			System.out.println("Course not found");
 		}
 		else {
 			for(Entry object : values) {
+				count ++;
+				total += object.getScore();
 				System.out.println(object.getName());
 				System.out.println(object.getScore());
 			}
 		}
+		System.out.println("Count:");
+		System.out.println(Integer.toString(count));
+		System.out.println("Average:");
+		System.out.println(Integer.toString(total / count));
 	}
 
 	public static void addRecord() {
