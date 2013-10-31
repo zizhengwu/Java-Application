@@ -9,6 +9,5 @@ public class printStudent {
 		Scanner scanner = new Scanner(System.in);
 		String word = scanner.nextLine();
 		Util.printStudent(word);
-		Util.writeBack();
 	}
 }
