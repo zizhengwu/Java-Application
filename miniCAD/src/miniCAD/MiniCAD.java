@@ -10,13 +10,23 @@ import javax.swing.*;
 
 public class MiniCAD extends JApplet{
 
+	private int currentType = 0;
+	private Buttons[] c = new Buttons[4];
+	KeyListener keyListener;
 	BufferedImage img;
 	static int w;
 	static int h;
-
+	
+	ImageCanvas ic = new ImageCanvas();
     public MiniCAD() {
-    	ImageCanvas ic = new ImageCanvas();
-    	this.getContentPane().add(ic);
+		JPanel p = new JPanel();
+		p.setBackground(Color.BLACK);
+		p.setLayout(new FlowLayout(FlowLayout.LEFT));
+		for (int i = 0; i < 4; i++)
+			p.add(c[i] = new Buttons(i));
+		this.getContentPane().setLayout(new BorderLayout());
+		this.getContentPane().add(p, BorderLayout.NORTH);
+		this.getContentPane().add(ic, BorderLayout.CENTER);
     }
     
 	public class ImageCanvas extends JApplet{
@@ -41,15 +51,44 @@ public class MiniCAD extends JApplet{
 				return new Dimension(img.getWidth(null), img.getHeight(null));
 			}
 		}
+		
+		
 	}
 
 	public class Buttons extends JPanel{
+		private int type = 0;
+
+		public Buttons(int t) {
+			this.type = t;
+		}
 		
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+
+			int width = getSize().width;
+			int height = getSize().height;
+
+			switch (type) {
+			case 0:
+				g.drawLine(10, height - 10, width - 10, 10);
+				break;
+			case 1:
+				g.drawRect(10, 10, width - 20, height - 20);
+				break;
+			case 2:
+				g.drawOval(10, 10, width - 20, height - 20);
+				break;
+			case 3:
+				g.setFont(new Font("TimesRoman", Font.PLAIN, 24));
+				g.drawString("A", 10, 30);
+			}
+		}
+
+		public Dimension getPreferredSize() {
+			return new Dimension(40, 40);
+		}
 	}
 	
-	
-
- 
 	public static void main(String[] args) {
 		JFrame f = new JFrame("miniCAD");
 		MiniCAD mainFrame = new MiniCAD();
