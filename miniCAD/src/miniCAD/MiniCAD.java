@@ -38,11 +38,37 @@ public class MiniCAD extends JApplet{
 		for (int i = 0; i < 4; i++) {
 			c.add(cc[i] = new ColorButtons(i));
 		}
+//		save
+		JPanel s = new JPanel();
+        s.add(new JLabel("Save"));
+        SaveButton saveIt = new SaveButton();
+        s.add(saveIt);
 //		layout
 		this.getContentPane().setLayout(new BorderLayout());
 		this.getContentPane().add(p, BorderLayout.NORTH);
 		this.getContentPane().add(c, BorderLayout.WEST);
 		this.getContentPane().add(canvas, BorderLayout.CENTER);
+        this.getContentPane().add(s, BorderLayout.SOUTH);
+    }
+    
+    
+    public class SaveButton extends JButton {
+    	public SaveButton() {
+    		this.setText("click");
+			addMouseListener(new MouseAdapter() {
+				public void mousePressed(MouseEvent e) {
+					    // retrieve image
+					    File outputfile = new File("saved.jpg");
+					    try {
+							ImageIO.write(img, "png", outputfile);
+							JOptionPane.showMessageDialog(null,"saved to saved.img");
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+				}
+			});
+    	}
     }
     
 	public class ImageCanvas extends JApplet {
@@ -58,6 +84,7 @@ public class MiniCAD extends JApplet{
 			try {
 				img = ImageIO.read(new File("image.jpg"));
 			} catch (IOException e) {
+				JOptionPane.showMessageDialog(null,"please put the image as \"image.jpg\"");
 			}
 	        w = img.getWidth(null);
 	        h = img.getHeight(null);
@@ -196,6 +223,8 @@ public class MiniCAD extends JApplet{
 			default:
 				break;
 			}
+			
+			
 			addMouseListener(new MouseAdapter() {
 				public void mousePressed(MouseEvent e) {
 					if (currentColor != type) {
