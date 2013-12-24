@@ -12,7 +12,9 @@ import javax.swing.*;
 public class MiniCAD extends JApplet{
 
 	private int currentType = 0;
+	private int currentColor = 0;
 	private Buttons[] c = new Buttons[4];
+	private ColorButtons[] cc = new ColorButtons[4];
 	KeyListener keyListener;
 	BufferedImage img;
 	static int w;
@@ -20,18 +22,30 @@ public class MiniCAD extends JApplet{
 	Graphics2D g;
 	ImageCanvas canvas = new ImageCanvas();
 	
+	private Color[] colors = {Color.WHITE, Color.BLACK, Color.RED, Color.BLUE};
+	
     public MiniCAD() {
+//    	type button
 		JPanel p = new JPanel();
 		p.setBackground(Color.BLACK);
 		p.setLayout(new FlowLayout(FlowLayout.LEFT));
 		for (int i = 0; i < 4; i++)
 			p.add(c[i] = new Buttons(i));
+//		color button
+		JPanel c = new JPanel();
+		c.setBackground(Color.BLACK);
+		c.setLayout(new FlowLayout(FlowLayout.LEADING));
+		for (int i = 0; i < 4; i++) {
+			c.add(cc[i] = new ColorButtons(i));
+		}
+//		layout
 		this.getContentPane().setLayout(new BorderLayout());
 		this.getContentPane().add(p, BorderLayout.NORTH);
+		this.getContentPane().add(c, BorderLayout.WEST);
 		this.getContentPane().add(canvas, BorderLayout.CENTER);
     }
     
-	public class ImageCanvas extends JApplet{
+	public class ImageCanvas extends JApplet {
 		int endX;
 		int endY;
 		private Point start = new Point(20, 20);
@@ -74,7 +88,7 @@ public class MiniCAD extends JApplet{
 			
 			addMouseListener(new MouseAdapter() {
 				public void mouseReleased(MouseEvent e) {
-
+					g.setColor(colors[currentColor]);
 					switch (currentType) {
 					case 0:
 						g.drawLine(start.x, start.y, e.getX(), e.getY());
@@ -132,8 +146,7 @@ public class MiniCAD extends JApplet{
 				}
 			});
 		}
-		
-		
+				
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 
@@ -158,6 +171,39 @@ public class MiniCAD extends JApplet{
 
 		public Dimension getPreferredSize() {
 			return new Dimension(40, 40);
+		}
+	}
+	
+	public class ColorButtons extends JPanel {
+		private int type = 0;
+		
+		
+		public ColorButtons(int t) {
+			this.type = t;
+			switch (type) {
+			case 0:
+				this.setBackground(Color.WHITE);
+				break;
+			case 1:
+				this.setBackground(Color.BLACK);
+				break;
+			case 2:
+				this.setBackground(Color.RED);
+				break;
+			case 3:
+				this.setBackground(Color.BLUE);
+				break;
+			default:
+				break;
+			}
+			addMouseListener(new MouseAdapter() {
+				public void mousePressed(MouseEvent e) {
+					if (currentColor != type) {
+						currentColor = type;
+					}
+				}
+			});
+			
 		}
 	}
 	
